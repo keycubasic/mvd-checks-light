@@ -1,0 +1,7 @@
+include:
+  - project: 'b2b/services/ci-cd-resources'
+    ref: master
+    file: 'gitlab/general-services-gradle-java-17-ci-pipeline.yaml'
+  - project: 'b2b/services/ci-cd-resources'
+    ref: master
+    file: 'gitlab/openshift-pipelines/environments.yaml'

@@ -1,0 +1,18 @@
+FROM registry.access.redhat.com/ubi8/openjdk-17:1.16
+EXPOSE 8443
+USER root
+
+ARG UNAME=user
+ARG UID=1001
+ARG GID=1001
+RUN groupadd -g $GID -o $UNAME
+RUN useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME
+COPY --chown=1001:1001 build/quarkus-app /app/
+
+RUN mkdir -p /uploads
+RUN chown 1001:1001 -R /uploads
+# VOLUME /uploads
+
+WORKDIR /app
+
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTIONS -jar quarkus-run.jar"]
